@@ -196,7 +196,8 @@ order by attritionrate desc;
 ```
 
 **9) Do employees in certain departments or job roles leave sooner than others?**
-```SELECT 
+```sql
+SELECT 
     department, 
     ROUND(AVG(DATE_PART('year', AGE(exitdate, joindate)) * 12 + 
               DATE_PART('month', AGE(exitdate, joindate))), 1) AS avg_tenure_months
