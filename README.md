@@ -85,7 +85,7 @@ order by year;
 ```
 
 **4) Finding the Average number of employees**
-
+```sql
 select 
    extract(year from joindate) as year,
    (count(case when exitdate is null then employeeid end)+
@@ -93,6 +93,7 @@ select
 
 from employee
 group by year ;
+```
 
 **5) What is the overall attrition rate for the company by year ?**
 -- Attrition Rate =( Average Number of Employees /Number of Employees Who Left)×100 --
