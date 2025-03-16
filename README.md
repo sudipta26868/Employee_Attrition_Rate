@@ -196,11 +196,15 @@ order by attritionrate desc;
 ```
 
 **9) Do employees in certain departments or job roles leave sooner than others?**
-```sql
-select department , extract(months from joindate)-extract(months from exitdate) 
-from employee
-where exitdate is not null 
-group by department ;
+```SELECT 
+    department, 
+    ROUND(AVG(DATE_PART('year', AGE(exitdate, joindate)) * 12 + 
+              DATE_PART('month', AGE(exitdate, joindate))), 1) AS avg_tenure_months
+FROM employee
+WHERE exitdate IS NOT NULL 
+GROUP BY department
+ORDER BY avg_tenure_months ASC;
+
 ```
 
 **10) Does age impact attrition? Are younger or older employees leaving more?**
@@ -211,7 +215,11 @@ group by age
 order by employeeleft desc;
 ```
 
-
+### Findings 
+1) From those above questions we can see that employee attrition rate is increasing by year , In the year of 2022 and 2023 have the attrition rate of 41% and 50% accordingly , but 2024 and 2025 have the attrition rate of 111% and 200% accordingly )
+2) September is the month where most of the employees left the company
+3) According to the report 'operation' department has the highest attrition rate .
+4) Most of the senior professionals left the company sooner . 
 
 
 
